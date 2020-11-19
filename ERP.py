@@ -179,17 +179,46 @@ def mayorComprador():
         dineroGastado = line.lstrip(": QWERTYUIOPÑLKJHGFDSAZXCVBNMqwertyuiopñlkjhgfdsazxcvbnm")
         if int(dineroGastado) > int(mayorComprador):
             mayorComprador = dineroGastado
-            clienteGanador = line.rstrip(": 0123456789")
+            clienteGanador = line.rstrip("\n: 0123456789")
     print("\nEl cliente que mas ha gastado ha sido: "+clienteGanador+" con: "+mayorComprador+"€")
 
 def fidelizarCliente():
     f = open("Historial", "r")
     lines = f.readlines()
-
+    print("Los clientes que se pueden fidelizar son:")
     for line in lines:
         dineroGastado = line.lstrip(": QWERTYUIOPÑLKJHGFDSAZXCVBNMqwertyuiopñlkjhgfdsazxcvbnm")
         if int(dineroGastado) > 2000:
-            print(line.strip(": 0123456789"))
+            print(line.rstrip("\n: 0123456789"))
+
+    clienteFidelizado = input("\nIntroduce el cliente a fidelizar: ")
+    f2 = open("ClientesFidelizados", "r")
+    ClientesFidelizados = f2.readlines()
+    if ClientesFidelizados == []:
+        f2.open("ClientesFidelizados", "w")
+        f2.write(clienteFidelizado)
+        f2.close()
+    else :
+        x = 0
+        for cliente in ClientesFidelizados:
+            # Si el cliente ya esta en el histrial se sobreescribe su registro
+            if cliente.strip(": 0123456789") == usuario:
+                f5w = open("Historial", "w")
+                historialCliente = cliente.strip(": QWERTYUIOPÑLKJHGFDSAZXCVBNMqwertyuiopñlkjhgfdsazxcvbnm")
+                total = int(historialCliente) + Beneficio
+                historial[x] = usuario + ": " + str(total)
+                for cliente in historial:
+                    f5w.write(cliente)
+                f5w.close()
+            # Si no existe en el registro lo añade con su primera compra
+            else:
+                f5w = open("Historial", "a")
+                f5w.write("\n" + usuario + ": " + str(Beneficio))
+                f5w.close()
+            x = x + 1
+
+
+
 
 
 
