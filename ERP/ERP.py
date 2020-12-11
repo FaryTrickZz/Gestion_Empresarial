@@ -48,9 +48,9 @@ def eliminarUsuario():
 
 
 def comprobarStock():
-    f = open("Productos", "r")
+    f = open("ERP/Productos", "r")
     productos = f.readlines()
-    f2 = open("Stock")
+    f2 = open("ERP/Stock", "r")
     stock = f2.readlines()
     x = 0
     while x < len(productos):
@@ -63,10 +63,10 @@ def comprobarStock():
 
 
 def añadirStock(idProducto):
-    f = open("Productos", "r")
+    f = open("ERP/Productos", "r")
     productos = f.readlines()
     f.close()
-    f = open("Stock", "r")
+    f = open("ERP/Stock", "r")
     stockProductos = f.readlines()
     for producto in productos:
         if producto.startswith(str(idProducto)):
